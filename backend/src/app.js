@@ -3,7 +3,7 @@ const express = require("express");
 const cors = require("cors");
 
 //Middlewares & routes
-const errorHandler = require("./middlewares/ErrorHandler");
+const errorHandler = require("./middlewares/errorHandler");
 const authRouter = require("./routes/authRoute");
 const playlistRouter = require("./routes/playlistRoute");
 //Loading Env variables
