@@ -21,7 +21,12 @@ const app = new express();
 app.use(express.json());
 
 //cors
-app.use(cors());
+const corsOptions = {
+  origin: [process.env.frontEnd_Link],
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+app.use(cors(corsOptions));
 
 // Router Mounting
 app.get("/", (req, res) => {
