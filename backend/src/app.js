@@ -24,6 +24,9 @@ app.use(express.json());
 app.use(cors());
 
 // Router Mounting
+app.get("/", (req, res) => {
+  res.send("Welcome to Backend API");
+});
 app.use("/api/v1", authRouter);
 app.use("/api/v1/playlist", playlistRouter);
 //Global error handler
@@ -31,6 +34,4 @@ app.use(errorHandler);
 
 const PORT = process.env.PORT || 8080;
 
-app.listen(PORT, () => {
-  console.log(`Server listening at Port No :${PORT}`);
-});
+module.exports = app;

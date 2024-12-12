@@ -1,13 +1,15 @@
 {
-    "functions": {
-        "backend/src/**/*.js": {
-            "runtime": "nodejs18.x"
-        }
-    },
-    "rewrites": [
+    "version": 2,
+    "builds": [
         {
-            "source": "/api/(.*)",
-            "destination": "/backend/src/$1"
+            "src": "src/app.js",
+            "use": "@vercel/node"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "src/app.js"
         }
     ]
 }
