@@ -23,10 +23,13 @@ app.use(express.json());
 //cors
 const corsOptions = {
   origin: [process.env.frontEnd_Link],
-  methods: ["GET", "POST", "PUT", "DELETE"],
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
 app.use(cors(corsOptions));
+
+// Handle preflight requests
+app.options("*", cors(corsOptions));
 
 // Router Mounting
 app.get("/", (req, res) => {
