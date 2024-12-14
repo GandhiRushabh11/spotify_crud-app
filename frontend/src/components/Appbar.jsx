@@ -36,6 +36,22 @@ const Appbar = () => {
       </Link>
       <div className="flex items-center gap-3">
         <div className="mt-2">
+          <Button
+            label="Serach Song"
+            onClick={() => {
+              navigate("/dashboard");
+            }}
+          ></Button>
+        </div>
+        <div className="mt-2">
+          <Button
+            label="Manage Playlist"
+            onClick={() => {
+              navigate("/manage-playlist");
+            }}
+          ></Button>
+        </div>
+        <div className="mt-2">
           <Button label={"Sign Out"} onClick={signOutHandler}></Button>
         </div>
         <div className="rounded-full h-10 w-10 p-4 bg-slate-200 flex justify-center mr-2">

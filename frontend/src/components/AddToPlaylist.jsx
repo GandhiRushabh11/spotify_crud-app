@@ -173,12 +173,12 @@ function AddToPlaylist({ isOpen, toggleAddToPlaylist, track }) {
             <p className="text-gray-700 dark:text-gray-300 mb-4">
               Please create a playlist first.
             </p>
-            <Link
-              to="/manage-playlist"
-              className="text-white bg-gray-500 hover:bg-gray-600 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-4 py-2.5"
-            >
-              Go to Create Playlist
-            </Link>
+            <Button
+              label="Go to Create Playlist"
+              onClick={() => {
+                navigate("/manage-playlist");
+              }}
+            />
           </div>
         )}
       </div>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
+import { Button } from "../components/Button";
 
 const PlaylistForm = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -106,7 +107,7 @@ const PlaylistForm = () => {
   return (
     <div>
       <Appbar />
-      <div className="m-8">
+      <div className="m-8 ">
         <div className="p-4 max-w-full mx-auto">
           <div className="space-y-4 bg-white p-6 rounded-lg shadow-md">
             <div className="flex items-center gap-4">
@@ -148,41 +149,45 @@ const PlaylistForm = () => {
                 />
               </div>
             </div>
-            <button
+            <Button
               onClick={isEditing ? handleUpdate : handleAdd}
-              className="w-full px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-colors"
-            >
-              {isEditing ? "Update Playlist" : "Add Playlist"}
-            </button>
+              label={isEditing ? "Update Playlist" : "Add Playlist"}
+            />
           </div>
-          <h2 className="text-xl font-bold mt-8 mb-4">Playlists</h2>
-          <ul className="space-y-4">
-            {playlists.map((playlist) => (
-              <li
-                key={playlist._id}
-                className="bg-gray-100 p-4 rounded-md flex justify-between items-center"
-              >
-                <div>
-                  <h3 className="text-lg font-semibold">{playlist.title}</h3>
-                  <p className="text-gray-600">{playlist.description}</p>
-                </div>
-                <div className="space-x-2">
-                  <button
-                    onClick={() => handleEdit(playlist._id)}
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
-                  >
-                    <FaEdit />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(playlist._id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
-                  >
-                    <FaTrashAlt />
-                  </button>
-                </div>
-              </li>
-            ))}
-          </ul>
+          <h2 className="text-xl font-bold mt-8 mb-4 space-y-4">Playlists</h2>
+          {playlists.length === 0 ? (
+            <div className="text-center text-gray-500 text-xl mt-8">
+              No Results Found
+            </div>
+          ) : (
+            <ul className="space-y-4">
+              {playlists.map((playlist) => (
+                <li
+                  key={playlist._id}
+                  className="bg-gray-100 p-4 rounded-md flex justify-between items-center"
+                >
+                  <div>
+                    <h3 className="text-lg font-semibold">{playlist.title}</h3>
+                    <p className="text-gray-600">{playlist.description}</p>
+                  </div>
+                  <div className="space-x-2">
+                    <button
+                      onClick={() => handleEdit(playlist._id)}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition"
+                    >
+                      <FaEdit />
+                    </button>
+                    <button
+                      onClick={() => handleDelete(playlist._id)}
+                      className="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition"
+                    >
+                      <FaTrashAlt />
+                    </button>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       </div>
     </div>
