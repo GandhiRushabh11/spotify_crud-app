@@ -18,33 +18,46 @@
 ```bash
 git clone https://github.com/GandhiRushabh11/spotify_crud_app
 cd spotify_crud_app
+```
 
-
+```bash
 cd backend
-
 npm install
+```
 
-then setup all key and server port (8000) in config copy.env (Please rename in to config.env)
-
+Then renamed config copy.env to config.env and all key value pair listed below
+```ENV
+MONGODB_URL = `{Add your mopngo server link }`
+PORT = `{Add your port}`
+JWT_SECRET = `{Add your JWT }`
+JWT_EXPIRE = `{Add your JWT Expire Time }`
+frontEnd_Link =`{Add your Frontend server link }`
+```
 and then run
 
-```npm run dev
+``` bash
+npm run dev
 
-For client
+```
 
-cd frontend
+### For FrontEnd 
 
+```bash
+cd backend
 npm install
+```
 
 Rename a .copyenv file to .env in the frontend directory with the following content:
-
+```ENV
 VITE_SERVER_URL = `{Add your backend server link }`
 SPOTIFY_CLIENT_ID = `{Add your spotify client Id}`
 SPOTIFY_CLIENT_SECRET = `{Add your spotify  client Secrets}`
-
+```
 and then run 
 
-```npm run dev
+```bash
+npm run dev
+```
 
 ## Application Features
 
@@ -53,22 +66,21 @@ and then run
 1. **Register**: 
    - The user signs up with a username, email, and password.
    - A JWT token is generated and stored for authenticating future requests.
-   - Route look like :- `${URL}/singin`
+   - Route look like :- `${URL}/singup`
 2. **Login**: 
    - The user logs in using their email and password.
    - Upon successful login, the JWT token is stored, and the user is redirected to the **Dashboard**.
    - Route look like :- `${URL}/login`
 
-3. **Access Dashboard**:
-   - The user can view, create, edit, and delete tasks.
-   - All API requests are authenticated using the stored JWT token.
+3. **Access Dashboard / Spotify API Integration**:
+   - Dashboard have search bar that allows users to search for songs.
+   - Allowing users to add songs from the search results to their playlists.
    - Route look like :- `${URL}/dashboard`
-
-
-![image](https://github.com/user-attachments/assets/0bb6780a-d7e7-4603-ac36-7b1c82dde95d)
-![image](https://github.com/user-attachments/assets/ea870a32-85c8-48da-b308-af7593bb5642)
-`In progress`
-![image](https://github.com/user-attachments/assets/639994eb-4913-461b-a1b6-db7f2af1f88a)
-
+     
+3. **Playlist Management**:
+   - Create a dashboard where users can view all their playlists.
+   - Implement forms to add new playlists and update existing ones.
+   - Enable users to delete playlists
+   - Route look like :- `${URL}/manage-playlist`
 
 
