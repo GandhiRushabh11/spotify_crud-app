@@ -29,7 +29,6 @@ const PlaylistForm = () => {
             headers: { Authorization: `Bearer ${userToken}` },
           }
         );
-        console.log(newPlaylist.data.data);
         setPlaylists([...playlists, newPlaylist.data.data]);
         setForm({ title: "", description: "" });
       } catch (error) {
@@ -95,7 +94,6 @@ const PlaylistForm = () => {
             headers: { Authorization: `Bearer ${userToken}` },
           }
         );
-        console.log(response.data.data);
 
         setPlaylists(response.data.data);
       } catch (error) {

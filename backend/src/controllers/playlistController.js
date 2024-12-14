@@ -165,7 +165,6 @@ exports.handleAddTrackToPlaylist = async (req, res, next) => {
       _id: id,
       songs: { $elemMatch: { songId: songId } },
     });
-    console.log(isSongExits);
 
     if (isSongExits) {
       return res.status(404).json({

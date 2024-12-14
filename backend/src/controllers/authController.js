@@ -22,7 +22,6 @@ exports.handleUserRegistration = async (req, res, next) => {
       "User registration completed successfully."
     );
   } catch (error) {
-    console.log(error);
     if (error instanceof ZodError) {
       return next(error);
     }

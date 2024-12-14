@@ -25,7 +25,6 @@ function AddToPlaylist({ isOpen, toggleAddToPlaylist, track }) {
             headers: { Authorization: `Bearer ${userToken}` },
           }
         );
-        console.log(response.data.data);
 
         setPlaylists(response.data.data);
       } catch (error) {
@@ -45,12 +44,10 @@ function AddToPlaylist({ isOpen, toggleAddToPlaylist, track }) {
           },
         }
       );
-      console.log(updatedPlaylist);
 
       toggleAddToPlaylist(!isOpen);
       toast.success("Song has been added to your playlist.");
     } catch (error) {
-      console.log(error);
       toast.error(error.response.data.message);
       toggleAddToPlaylist(!isOpen);
     }

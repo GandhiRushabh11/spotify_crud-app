@@ -60,10 +60,8 @@ export const getSpotifyToken = async () => {
         },
       }
     );
-    console.log(response.data);
     return response.data.access_token;
   } catch (error) {
-    console.log("Error fetching Spotify token:", error);
     throw error;
   }
 };

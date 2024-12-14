@@ -64,7 +64,6 @@ function Signup() {
                       password,
                     }
                   );
-                  console.log(response);
                   localStorage.setItem("token", response.data.token);
                   toast.success("User created successfully");
                   navigate("/dashboard");
