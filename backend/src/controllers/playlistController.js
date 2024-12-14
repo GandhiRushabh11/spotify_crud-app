@@ -1,6 +1,7 @@
 const {
   playlistSchema: zodPlaylistSchema,
   playlistSchema,
+  songSchema,
 } = require("../validations/playlistValidation");
 const Playlist = require("../models/playlistModel");
 
@@ -142,5 +143,58 @@ exports.handleUpdatePlaylist = async (req, res, next) => {
       return next(error);
     }
     next(error);
+  }
+};
+
+// Updating Plaulist
+
+exports.handleAddTrackToPlaylist = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { title, duration, songId } = req.body;
+
+    // Validate the request body
+    const validatedData = songSchema.parse({
+      title,
+      duration,
+      songId,
+    });
+
+    //Checking If Song Already Exits on playlist before adding
+    const isSongExits = await Playlist.findOne({
+      _id: id,
+      songs: { $elemMatch: { songId: songId } },
+    });
+    console.log(isSongExits);
+
+    if (isSongExits) {
+      return res.status(404).json({
+        success: false,
+        message: "This track is already added to your playlist.",
+      });
+    }
+
+    const updatedPlaylist = await Playlist.findOneAndUpdate(
+      { _id: id },
+      { $push: { songs: validatedData } },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedPlaylist) {
+      return res.status(404).json({
+        success: false,
+        message: "Playlist not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: updatedPlaylist,
+    });
+  } catch (error) {
+    if (error.name === "ZodError") {
+      return next(error);
+    }
+    next(`Error adding song: ${error.message}`);
   }
 };

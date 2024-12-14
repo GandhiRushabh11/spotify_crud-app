@@ -6,6 +6,14 @@ const songSchema = new mongoose.Schema({
     required: [true, "Song title is required"],
     trim: true,
   },
+  duration: {
+    type: String,
+    required: [true, "Song duration is required"],
+  },
+  songId: {
+    type: String,
+    required: [true, "Song ID is required"],
+  },
 });
 
 const playlistSchema = new mongoose.Schema(

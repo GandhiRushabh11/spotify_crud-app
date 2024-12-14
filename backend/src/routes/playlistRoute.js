@@ -7,11 +7,14 @@ const {
   handleDeletePlaylist,
   handleUpdatePlaylist,
   handleGetPlaylist,
+  handleAddTrackToPlaylist,
 } = require("../controllers/playlistController");
 
 const router = express.Router();
 
 router.post("/", protect, handleCreatePlaylist);
+
+router.put("/:id/song", protect, handleAddTrackToPlaylist);
 
 router.put("/:id", protect, handleUpdatePlaylist);
 
