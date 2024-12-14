@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { searchSpotify } from "../services/spotify";
 import { toast } from "react-toastify";
+import AddToPlaylist from "../components/AddToPlaylist";
 
 function PlayList() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState("millionaire");
   const [songs, setSongs] = useState([]);
   const accessToken = localStorage.getItem("spotifyToken");
+  const [isOpen, setIsOpen] = useState(false);
+  const [trackID, setTrackID] = useState("");
 
   // Fetch songs from Spotify
   const fetchSongs = async (searchQuery) => {
@@ -20,8 +23,9 @@ function PlayList() {
     }
   };
 
-  const handleAddToPlaylist = (trackId) => {
-    console.log(`Track ${trackId} added to playlist`);
+  const toggleAddToPlaylist = (track) => {
+    setIsOpen(!isOpen);
+    setTrackID(track);
   };
 
   useEffect(() => {
@@ -52,7 +56,7 @@ function PlayList() {
                 className="bg-white p-5 rounded-lg shadow-lg hover:shadow-xl transition duration-200"
               >
                 <img
-                  src={song.album.images[1].url}
+                  src={song?.album.images[1].url}
                   alt={song.name}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />
@@ -61,7 +65,7 @@ function PlayList() {
                   {song.artists.map((artist) => artist.name).join(", ")}
                 </p>
                 <button
-                  onClick={() => handleAddToPlaylist(song.id)}
+                  onClick={() => toggleAddToPlaylist(song)}
                   className="mt-4 bg-gray-400 text-white p-2 rounded-full hover:bg-gray-600 transition duration-200"
                 >
                   <FaPlusCircle />
@@ -69,6 +73,13 @@ function PlayList() {
               </div>
             ))}
         </div>
+      )}
+      {isOpen === true && (
+        <AddToPlaylist
+          isOpen={isOpen}
+          toggleAddToPlaylist={toggleAddToPlaylist}
+          track={trackID}
+        />
       )}
     </div>
   );

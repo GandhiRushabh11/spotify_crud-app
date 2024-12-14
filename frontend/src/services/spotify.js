@@ -4,15 +4,18 @@ import { toast } from "react-toastify";
 // Search Spotify songs
 export const searchNewReleases = async (token) => {
   try {
-    const response = await axios.get(`https://api.spotify.com/v1/search`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      params: {
-        limit: 10,
-        offset: 5,
-      },
-    });
+    const response = await axios.get(
+      `https://api.spotify.com/v1/browse/new-releases`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        params: {
+          limit: 10,
+          offset: 5,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     toast.error("Error searching songs from Spotify:", error);
