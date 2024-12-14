@@ -5,6 +5,9 @@
 - Database: MongoDB
 - Authentication: JSON Web Tokens (JWT)
 
+## Live Project Link 
+<a>https://spotify-crud-app.vercel.app</a>
+
 ## Getting Started
 
 ### Prerequisites
