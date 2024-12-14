@@ -2,11 +2,12 @@ import Appbar from "../components/Appbar";
 import { useNavigate } from "react-router";
 import PlayList from "./Playlist";
 import { getSpotifyToken } from "../services/spotify";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  const [tokenStatus, setTokenStatus] = useState(false);
   const getSpotifyAccessToken = async () => {
     const userToken = localStorage.getItem("token");
     // Check if token exists in local storage
@@ -17,6 +18,7 @@ const Dashboard = () => {
         const spotifyToken = await getSpotifyToken();
         //Setting Up spotifyToken For user
         localStorage.setItem("spotifyToken", spotifyToken);
+        setTokenStatus(true);
       } catch (error) {
         toast.error("Session expired, please login again.");
       }
@@ -29,7 +31,13 @@ const Dashboard = () => {
     <div>
       <Appbar />
       <div className="m-8">
-        <PlayList />
+        {tokenStatus ? (
+          <PlayList />
+        ) : (
+          <div className="text-center text-gray-500 text-xl mt-8">
+            Loading ...
+          </div>
+        )}
       </div>
     </div>
   );
